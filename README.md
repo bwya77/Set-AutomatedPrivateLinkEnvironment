@@ -3,7 +3,7 @@ A common and recommended security practice is only allowing access to an Azure S
 
 This configuration isn’t as simple as creating or deploying a traditional Azure Runbook; you must create private endpoints, subnets, DNS zones, hybrid worker groups, and more. I wanted to make a PowerShell script that anyone could run, and it would generate everything for you from start to finish, so in the end, it would be working out of the box without additional configuration needed. This includes installing PowerShell Core on the Hybrid Runbook Worker. The diagram below gives an architectural overview of the deployment and configuration.
 
-> [!NOTE] Note
+> [!NOTE]
 > Private Link support with Azure Automation is available only in Azure Commercial and Azure US Government clouds.
 
  ```mermaid
@@ -76,5 +76,5 @@ The script handles everything from creating the Virtual Network with proper subn
 - Proper RBAC assignments for least privileged access
 - Network Security Group configuration for the Hybrid Worker VM
 
-> [!NOTE] Note
+> [!NOTE] 
 > While the script deploys the hybrid worker VM with a public IP address, you can remove the public IP address from the hybrid worker upon completion. I added it so I could install `Pwsh7` and set up Bastion access.
