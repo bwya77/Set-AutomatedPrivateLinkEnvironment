@@ -121,7 +121,7 @@ $params = @{
 }
 ```
 4. Now that we have specified deployment, open a PowerShell terminal and navigate to the location where you saved the script from step 1.
-![[CleanShot 2024-12-30 at 11.54.31.png]]
+![[/src/CleanShot 2024-12-30 at 11.54.31.png]]
 5. Next, let’s load our `$params` block from earlier 
 ![[CleanShot 2024-12-30 at 11.58.39.png]]
 6. Now we can dot source our PowerShell script with the `$params` values
