@@ -121,27 +121,27 @@ $params = @{
 }
 ```
 4. Now that we have specified deployment, open a PowerShell terminal and navigate to the location where you saved the script from step 1.
-![[src/CleanShot 2024-12-30 at 11.54.31.png]]
+![alt text](https://github.com/bwya77/Set-AutomatedPrivateLinkEnvironment/blob/main/src/CleanShot%202024-12-30%20at%2011.54.31.png)
 5. Next, let’s load our `$params` block from earlier 
-![[CleanShot 2024-12-30 at 11.58.39.png]]
+![alt text](https://github.com/bwya77/Set-AutomatedPrivateLinkEnvironment/blob/main/src/CleanShot%202024-12-30%20at%2011.58.39.png)
 6. Now we can dot source our PowerShell script with the `$params` values
-![[CleanShot 2024-12-30 at 12.02.54.png]]
+![alt text](https://github.com/bwya77/Set-AutomatedPrivateLinkEnvironment/blob/main/src/CleanShot%202024-12-30%20at%2012.02.54.png)
 7. The first thing the script will do will be to check that you have the correct modules installed, if not it will download them and then load them into memory. 
 8. Next, it will launch a web login for you to log into Azure with.
-![[CleanShot 2024-12-30 at 12.06.40.png]]
+![alt text](https://github.com/bwya77/Set-AutomatedPrivateLinkEnvironment/blob/main/src/CleanShot%202024-12-30%20at%2012.06.40.png)
 9. If you have multiple subscriptions, it will prompt you which subscription you want to deploy into
-![[CleanShot 2024-12-30 at 12.09.22 1.png]]
+![alt text](https://github.com/bwya77/Set-AutomatedPrivateLinkEnvironment/blob/main/src/CleanShot%202024-12-30%20at%2012.09.22.png)
 10. After that, since we had verbose messaging turned on, we can see it creating resources
-![[CleanShot 2024-12-30 at 12.10.33.png]]
+![alt text](https://github.com/bwya77/Set-AutomatedPrivateLinkEnvironment/blob/main/src/CleanShot%202024-12-30%20at%2012.10.33.png)
 ## Testing
 1. Once it’s complete, I can navigate to the Azure Portal and see everything that it deployed.
-![[CleanShot 2024-12-30 at 13.01.14.png]]
+![alt text](https://github.com/bwya77/Set-AutomatedPrivateLinkEnvironment/blob/main/src/CleanShot%202024-12-30%20at%2013.01.14.png)
 2. If I sign into the Hybrid Runbook worker using Bastion (the reason I gave this machine a public IP) I can go to `C:\` and see that PowerShell Core 7 has been installed. 
-![[CleanShot 2024-12-30 at 13.04.07.png]]
+![alt text](https://github.com/bwya77/Set-AutomatedPrivateLinkEnvironment/blob/main/src/CleanShot%202024-12-30%20at%2013.04.07.png)
 3. Next, I will create a test table entry in my table. 
-![[CleanShot 2024-12-30 at 13.17.02.png]]
+![alt text](https://github.com/bwya77/Set-AutomatedPrivateLinkEnvironment/blob/main/src/CleanShot%202024-12-30%20at%2013.17.02.png)
 4. Next, I will go to my Azure Automation Account and create a new test runbook to ensure I have access to the Storage Table
-![[CleanShot 2024-12-30 at 13.19.34 1.png]]
+![alt text](https://github.com/bwya77/Set-AutomatedPrivateLinkEnvironment/blob/main/src/CleanShot%202024-12-30%20at%2013.19.34%201.png)
 5. Next, I will paste the following PowerShell code for the runbook content:
 	1. Make sure to change the Storage Account name from `sahybridrw1226660012` to your Storage Account name.
 	2. Make sure to change the Table name from `demotable` to your Table’s name.
