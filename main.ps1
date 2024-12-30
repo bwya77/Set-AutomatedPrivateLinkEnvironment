@@ -1,4 +1,83 @@
-# Azure Private Link Environment Setup Script
+<#
+.SYNOPSIS
+Sets up a private link environment in Azure with Storage Account, Automation Account, and Hybrid Worker VM.
+
+.DESCRIPTION
+This script automates the setup of a private link environment in Azure, including:
+- Resource Group creation/configuration
+- Virtual Network and Subnet setup
+- Storage Account with private endpoint
+- Azure Automation Account with private endpoint
+- Hybrid Worker VM configuration
+- Private DNS zones and network links
+- Role assignments and permissions
+- Storage Table creation
+- PowerShell 7 installation on Hybrid Worker
+
+.PARAMETER ResourceGroupName
+The name of the Resource Group to create or use.
+
+.PARAMETER Location
+The Azure region where resources will be deployed.
+
+.PARAMETER StorageAccountName
+The name of the Storage Account to create.
+
+.PARAMETER AutomationAccountName
+The name of the Automation Account to create.
+
+.PARAMETER VirtualNetworkName
+The name of the Virtual Network to create.
+
+.PARAMETER VMName
+The name of the Hybrid Worker VM to create (max 15 characters).
+
+.PARAMETER AdminUsername
+The administrator username for the Hybrid Worker VM.
+
+.PARAMETER AdminPassword
+The administrator password for the Hybrid Worker VM as a SecureString.
+
+.PARAMETER RunbookWorkerGroupName
+The name of the Hybrid Worker group to create.
+
+.PARAMETER TableName
+The name of the Storage Table to create.
+
+.PARAMETER vnetAddressPrefix
+The address prefix for the Virtual Network (default: "10.0.0.0/16").
+
+.PARAMETER PrivateEndpointSubnetAddressPrefix
+The address prefix for the Private Endpoint subnet (default: "10.0.1.0/24").
+
+.PARAMETER HybridWorkerSubnetAddressPrefix
+The address prefix for the Hybrid Worker subnet (default: "10.0.2.0/24").
+
+.EXAMPLE
+$params = @{
+    ResourceGroupName = "MyResourceGroup"
+    Location = "northcentralus"
+    StorageAccountName = "mystorageacct545675"
+    AutomationAccountName = "myautomation"
+    VirtualNetworkName = "myvnet"
+    VMName = "myvm"
+    AdminUsername = "adminuser"
+    AdminPassword = (ConvertTo-SecureString "Password123!" -AsPlainText -Force)
+    RunbookWorkerGroupName = "MyWorkerGroup"
+    TableName = "MyTable"
+}
+.\Set-PrivateLinkEnvironment.ps1 @params
+
+.NOTES
+File Name      : Set-PrivateLinkEnvironment.ps1
+Author         : Bradley Wyatt
+Prerequisite   : Az PowerShell modules
+Version        : 1.0
+Copyright 2024 : The Lazy Administrator
+
+.LINK
+https://learn.microsoft.com/en-us/azure/private-link/
+#>
 [CmdletBinding()]
 param (
     [Parameter(Mandatory)]
