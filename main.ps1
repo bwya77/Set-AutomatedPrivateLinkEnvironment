@@ -29,7 +29,16 @@ param (
     [string]$RunbookWorkerGroupName,
 
     [Parameter(Mandatory)]
-    [string]$TableName
+    [string]$TableName,
+
+    [Parameter()]
+    [string]$vnetAddressPrefix = "10.0.0.0/16",
+
+    [Parameter()]
+    [string]$PrivateEndpointSubnetAddressPrefix = "10.0.1.0/24",
+
+    [Parameter()]
+    [string]$HybridWorkerSubnetAddressPrefix = "10.0.2.0/24"
 )
 # Create tags hashtable
 $tags = @{
@@ -39,17 +48,16 @@ $tags = @{
 #Make sure $VMname does not exceed 15 characters
 $VMName = $VMName.Substring(0, [Math]::Min(15, $VMName.Length))
 # Subnet configurations
-$vnetAddressPrefix = "10.0.0.0/16"
 $subnetConfigs = @(
     @{
         Name                           = "PrivateEndpointSubnet"
-        AddressPrefix                  = "10.0.1.0/24"
+        AddressPrefix                   = $PrivateEndpointSubnetAddressPrefix
         ServiceEndpoints               = @()
         PrivateEndpointNetworkPolicies = "Disabled"
     },
     @{
         Name                           = "HybridWorkerSubnet"
-        AddressPrefix                  = "10.0.2.0/24"
+        AddressPrefix                   = $HybridWorkerSubnetAddressPrefix
         ServiceEndpoints               = @()
         PrivateEndpointNetworkPolicies = "Enabled"
     }
