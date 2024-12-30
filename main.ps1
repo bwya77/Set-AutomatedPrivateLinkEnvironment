@@ -3,16 +3,15 @@
 Sets up a private link environment in Azure with Storage Account, Automation Account, and Hybrid Worker VM.
 
 .DESCRIPTION
-This script automates the setup of a private link environment in Azure, including:
-- Resource Group creation/configuration
-- Virtual Network and Subnet setup
-- Storage Account with private endpoint
-- Azure Automation Account with private endpoint
-- Hybrid Worker VM configuration
-- Private DNS zones and network links
-- Role assignments and permissions
-- Storage Table creation
-- PowerShell 7 installation on Hybrid Worker
+This script automates the setup of a private link environment in Azure. It creates and configures:
+- Resource Group with specified tags
+- Virtual Network with private endpoint and hybrid worker subnets
+- Storage Account with private endpoint and table storage
+- Azure Automation Account with private endpoint 
+- Hybrid Worker VM with PowerShell 7
+- Private DNS zones and network links for connectivity
+- Required role assignments and permissions
+- Network security configuration and firewall rules
 
 .PARAMETER ResourceGroupName
 The name of the Resource Group to create or use.
@@ -20,7 +19,7 @@ The name of the Resource Group to create or use.
 .PARAMETER Location
 The Azure region where resources will be deployed.
 
-.PARAMETER StorageAccountName
+.PARAMETER StorageAccountName 
 The name of the Storage Account to create.
 
 .PARAMETER AutomationAccountName
@@ -53,6 +52,9 @@ The address prefix for the Private Endpoint subnet (default: "10.0.1.0/24").
 .PARAMETER HybridWorkerSubnetAddressPrefix
 The address prefix for the Hybrid Worker subnet (default: "10.0.2.0/24").
 
+.PARAMETER Tags
+Hashtable of tags to apply to all resources (default: Automation=HybridWorker, Department=DevOps).
+
 .EXAMPLE
 $params = @{
     ResourceGroupName = "MyResourceGroup"
@@ -71,12 +73,14 @@ $params = @{
 .NOTES
 File Name      : Set-PrivateLinkEnvironment.ps1
 Author         : Bradley Wyatt
-Prerequisite   : Az PowerShell modules
+Prerequisite   : Azure PowerShell modules (Az.Network, Az.Storage, Az.Automation, Az.Compute, Az.OperationalInsights)
 Version        : 1.0
+Required Permissions : Subscription Contributor or equivalent custom role
 Copyright 2024 : The Lazy Administrator
 
 .LINK
 https://learn.microsoft.com/en-us/azure/private-link/
+https://learn.microsoft.com/en-us/azure/automation/automation-hybrid-runbook-worker
 #>
 [CmdletBinding()]
 param (
@@ -117,13 +121,14 @@ param (
     [string]$PrivateEndpointSubnetAddressPrefix = "10.0.1.0/24",
 
     [Parameter()]
-    [string]$HybridWorkerSubnetAddressPrefix = "10.0.2.0/24"
+    [string]$HybridWorkerSubnetAddressPrefix = "10.0.2.0/24",
+
+    [Parameter()]
+    [hashtable]$Tags = @{
+        "Automation" = "HybridWorker"
+        "Department" = "DevOps"
+    }
 )
-# Create tags hashtable
-$tags = @{
-    "Automation" = "HybridWorker"
-    "Department" = "DevOps"
-}
 #Make sure $VMname does not exceed 15 characters
 $VMName = $VMName.Substring(0, [Math]::Min(15, $VMName.Length))
 # Subnet configurations
