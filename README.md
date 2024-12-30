@@ -75,6 +75,17 @@ The script handles everything from creating the Virtual Network with proper subn
 - Zero public endpoint exposure for Storage Account
 - Proper RBAC assignments for least privileged access
 - Network Security Group configuration for the Hybrid Worker VM
+- Tags all the resources it deploys for easy identification
+
+## Pre-requisites
+1. Az Module
+	1. Az.Network
+	2. Az.Storage
+	3. Az.Automation
+	4. Az.Compute
+	5. Az.OperationalInsights
+2. Azure Subscription
+3. Proper Azure Permissions to create and manage resources within a subscription
 
 > [!NOTE] 
 > While the script deploys the hybrid worker VM with a public IP address, you can remove the public IP address from the hybrid worker upon completion. I added it so I could install `Pwsh7` and set up Bastion access.
