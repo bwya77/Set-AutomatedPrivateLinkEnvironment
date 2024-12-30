@@ -275,10 +275,10 @@ Get-AZTableEntityAll -StorageAccount 'sahybridrw1226660012' -TableName 'demotabl
 > [!NOTE] 
 > The first line is to install the Az module. We only need to do this once to install the module and then all other runbooks will be able to use the module. This is not part of the original build out script because the runbook runs as the `system` context. 
 
-7. When you test the runbook, select the Hybrid Worker for it to run on. 
-![[CleanShot 2024-12-30 at 13.24.35.png]]
+7. When you test the runbook, select the Hybrid Worker for it to run on.
+![alt text](https://github.com/bwya77/Set-AutomatedPrivateLinkEnvironment/blob/main/src/CleanShot%202024-12-30%20at%2013.24.35.png)
 8. Once the runbook completes running, we can see that it was able to retrieve my table data. 
-![[CleanShot 2024-12-30 at 13.31.16 1.png]]
+![alt text](https://github.com/bwya77/Set-AutomatedPrivateLinkEnvironment/blob/main/src/CleanShot%202024-12-30%20at%2013.31.16%201.png)
 9. Done! Reminder that you can delete or disassociate the public IP of the hybrid worker if you’d like. 
 ___
 # Sources 
